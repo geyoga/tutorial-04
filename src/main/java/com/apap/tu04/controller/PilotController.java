@@ -45,10 +45,22 @@ public class PilotController {
 		if (pilot == null) {
 			return "not-found";
 		}else {
+//			long license = Long.parseLong(licenseNumber);
+//			pilot.setId(license);
+//			System.out.println(pilot.getId());
 			model.addAttribute("pilot", pilot);
 			model.addAttribute("listFlight", pilot.getPilotFlight());
+			
 			return "view-pilot";
 		}
+	}
+	
+	@RequestMapping(value = "/pilot/delete/{licenseNumber}", method = RequestMethod.GET)
+	private String deletePilot(@PathVariable (value = "licenseNumber") String licenseNumber, Model model)  {
+		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
+		model.addAttribute("pilot", pilot);
+		pilotService.deletePilot(pilot);
+		return "delete-pilot";
 	}
 	
 	

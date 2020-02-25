@@ -12,6 +12,7 @@ import com.apap.tu04.repository.FlightDb;
 @Service
 @Transactional
 public class FlightServiceImpl implements FlightService{
+	
 	@Autowired
 	private FlightDb flightDb;
 	
@@ -19,4 +20,19 @@ public class FlightServiceImpl implements FlightService{
 	public void addFlight(FlightModel flight) {
 		flightDb.save(flight);
 	}
+
+	@Override
+	public void deleteFlight(FlightModel flight) {
+		// TODO Auto-generated method stub
+		flightDb.delete(flight);
+	}
+
+	@Override
+	public FlightModel getFlightByID(long id) {
+		// TODO Auto-generated method stub
+		
+		return flightDb.findById(id).get();
+	}
+
+	
 }
